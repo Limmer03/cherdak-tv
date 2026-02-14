@@ -1,13 +1,66 @@
 <!doctype html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Чердак — Пиво</title>
-    <script type="module" crossorigin src="./assets/index-DJQCRuM1.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-Cktd1G1B.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Чердак — Пиво</title>
+
+  <script type="module" crossorigin src="./assets/index-DJQCRuM1.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-Cktd1G1B.css">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+
+    #tv-wrap {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: #000;
+    }
+
+    #tv-stage {
+      width: 1920px;
+      height: 1080px;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform-origin: 0 0;
+      will-change: transform;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="tv-wrap">
+    <div id="tv-stage">
+      <div id="root"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const W = 1920, H = 1080;
+
+      function fitTV() {
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        const scale = Math.min(vw / W, vh / H);
+
+        const stage = document.getElementById('tv-stage');
+        stage.style.transform =
+          `translate(-50%, -50%) scale(${scale})`;
+      }
+
+      window.addEventListener('resize', fitTV);
+      fitTV();
+    })();
+  </script>
+</body>
 </html>
